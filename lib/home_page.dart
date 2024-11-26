@@ -9,7 +9,32 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Bloc"),
       ),
-      body: Container(),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(""),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                FloatingActionButton(
+                  onPressed: () {},
+                  tooltip: 'Decrement',
+                  child: const Icon(Icons.remove),
+                ),
+                const SizedBox(
+                  width: 24,
+                ),
+                FloatingActionButton(
+                  onPressed: () {},
+                  tooltip: 'Increment',
+                  child: const Icon(Icons.add),
+                )
+              ],
+            )
+          ],
+        ),
+      ),
     );
   }
 }
