@@ -14,9 +14,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     // BlocProvider is a Flutter widget which provides a bloc to its children via BlocProvider.of<T>(context).
     // https://pub.dev/packages/flutter_bloc#blocprovider
-    return BlocProvider(
+    return MultiBlocProvider(
       // lazy: false,
-      create: (context) => CounterCubit(),
+      providers: [
+        BlocProvider<CounterCubit>(create: (context) => CounterCubit())
+      ],
       child: MaterialApp(
         title: 'Flutter Bloc',
         debugShowCheckedModeBanner: false,
@@ -27,5 +29,18 @@ class MyApp extends StatelessWidget {
         home: const HomePage(),
       ),
     );
+    // return BlocProvider(
+    //   // lazy: false,
+    //   create: (context) => CounterCubit(),
+    //   child: MaterialApp(
+    //     title: 'Flutter Bloc',
+    //     debugShowCheckedModeBanner: false,
+    //     theme: ThemeData(
+    //       colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+    //       useMaterial3: true,
+    //     ),
+    //     home: const HomePage(),
+    //   ),
+    // );
   }
 }

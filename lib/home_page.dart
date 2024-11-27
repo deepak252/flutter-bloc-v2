@@ -17,15 +17,41 @@ class HomePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            MultiBlocListener(
+                listeners: [
+                  BlocListener<CounterCubit, CounterState>(
+                    // listenWhen: (prevState, state) {
+                    //   return state.counterValue % 2 == 0;
+                    // },
+                    // this listener function is called only once per state (not including the initial state, i.e, not get called on initial load)
+                    listener: (context, state) {
+                      if (state.wasIncremented == true) {
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(const SnackBar(
+                          content: Text('Incremented'),
+                        ));
+                      } else {
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(const SnackBar(
+                          content: Text('Decremented'),
+                        ));
+                      }
+                    },
+                  )
+                ],
+                child: const Text(
+                  "Counter2",
+                  style: TextStyle(fontSize: 30),
+                )),
             // BlocConsumer combines both BlocBuilder and BlocListener in a single widget.
             BlocConsumer<CounterCubit, CounterState>(
-            // listenWhen: (prevState, state) {
-            //   return state.counterValue % 2 == 0;
-            // },
-            // buildWhen: (prevState, state) {
-            //   return state.counterValue % 2 == 0;
-            // },
-             listener: (context, state) {
+                // listenWhen: (prevState, state) {
+                //   return state.counterValue % 2 == 0;
+                // },
+                // buildWhen: (prevState, state) {
+                //   return state.counterValue % 2 == 0;
+                // },
+                listener: (context, state) {
               // this listener function is called only once per state (not including the initial state, i.e, not get called on initial load)
               if (state.wasIncremented == true) {
                 ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
