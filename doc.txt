@@ -1,0 +1,31 @@
+// Architecture: 
+
+    UI          <==>            Bloc            <==>        Data
+    
+    Presentation            Business Logic                  Data
+    Layer                   Layer                           Layer
+
+
+DATA LAYER: Repositories <=> Data Providers  <=> Models
+
+Model: It is a blueprint to the data your application will work with.
+    A model should not be completely linked to the data.
+    Should be independent of the source
+    Should be Generic and Universal to the multiple data sources.
+
+Data Provider: Provides the raw data to the repository sublayer.
+    Eg. APIs to fetch the data from the internet (http.get, http.post etc)
+    The return type of the API class functions should not be the MODEL, but type of the RAW Data received from the data source.
+
+REPOSITORY: Part of data layer through wich Bloc communicates. Prepares the data and sends it to the Bloc layer.
+    Wrapper around one or more Data Providers.
+    Model classes are instantiated as objects here.
+    A class which contains dependencies of their respective data providers.
+
+
+
+BUSINESS LOGIC LAYER:
+    Intermediate bw Presentation layer and Data layer
+    
+
+
