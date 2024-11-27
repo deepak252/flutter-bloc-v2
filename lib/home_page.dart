@@ -13,75 +13,139 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Bloc"),
       ),
-      body: BlocListener<CounterCubit, CounterState>(
-        // listenWhen: (prevState, state) {
-        //   return state.counterValue % 2 == 0;
-        // },
-        // this listener function is called only once per state (not including the initial state, i.e, not get called on initial load)
-        listener: (context, state) {
-          if (state.wasIncremented == true) {
-            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-              content: Text('Incremented'),
-            ));
-          } else {
-            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-              content: Text('Decremented'),
-            ));
-          }
-        },
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              // BlocBuilder: A widget that helps re-building the UI based on bloc state changes
-              BlocBuilder<CounterCubit, CounterState>(
-                  // buildWhen: (prevState, currState) {
-                  //   // Return true/false to determine whether or not to rebuild the widget with state
-                  //   return currState.counterValue % 2 == 0;
-                  // },
-                  builder: (context, state) {
-                // return widget here based on Bloc State
-                // the builder function can be called MULTIPLE TIMES (bcoz of flutter engine)
-                return Text(
-                  "${state.counterValue}",
-                  style: const TextStyle(fontSize: 30),
-                );
-              }),
-              const SizedBox(
-                height: 20,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  FloatingActionButton(
-                    onPressed: () {
-                      // // Without extensions
-                      // BlocProvider.of<CounterCubit>(context).decrement();
-                      // // with extensions
-                      context.read<CounterCubit>().decrement();
-                    },
-                    tooltip: 'Decrement',
-                    child: const Icon(Icons.remove),
-                  ),
-                  const SizedBox(
-                    width: 24,
-                  ),
-                  FloatingActionButton(
-                    onPressed: () {
-                      // // Without extensions
-                      // BlocProvider.of<CounterCubit>(context).increment();
-                      // // with extensions
-                      context.read<CounterCubit>().increment();
-                    },
-                    tooltip: 'Increment',
-                    child: const Icon(Icons.add),
-                  )
-                ],
-              )
-            ],
-          ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // BlocConsumer combines both BlocBuilder and BlocListener in a single widget.
+            BlocConsumer<CounterCubit, CounterState>(
+            // listenWhen: (prevState, state) {
+            //   return state.counterValue % 2 == 0;
+            // },
+            // buildWhen: (prevState, state) {
+            //   return state.counterValue % 2 == 0;
+            // },
+             listener: (context, state) {
+              // this listener function is called only once per state (not including the initial state, i.e, not get called on initial load)
+              if (state.wasIncremented == true) {
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                  content: Text('Incremented'),
+                ));
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                  content: Text('Decremented'),
+                ));
+              }
+            }, builder: (context, state) {
+              // the builder function can be called MULTIPLE TIMES (bcoz of flutter engine)
+              return Text(
+                "${state.counterValue}",
+                style: const TextStyle(fontSize: 30),
+              );
+            }),
+            const SizedBox(
+              height: 20,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                FloatingActionButton(
+                  onPressed: () {
+                    // // Without extensions
+                    // BlocProvider.of<CounterCubit>(context).decrement();
+                    // // with extensions
+                    context.read<CounterCubit>().decrement();
+                  },
+                  tooltip: 'Decrement',
+                  child: const Icon(Icons.remove),
+                ),
+                const SizedBox(
+                  width: 24,
+                ),
+                FloatingActionButton(
+                  onPressed: () {
+                    // // Without extensions
+                    // BlocProvider.of<CounterCubit>(context).increment();
+                    // // with extensions
+                    context.read<CounterCubit>().increment();
+                  },
+                  tooltip: 'Increment',
+                  child: const Icon(Icons.add),
+                )
+              ],
+            )
+          ],
         ),
       ),
+      // body: BlocListener<CounterCubit, CounterState>(
+      //   // listenWhen: (prevState, state) {
+      //   //   return state.counterValue % 2 == 0;
+      //   // },
+      //   // this listener function is called only once per state (not including the initial state, i.e, not get called on initial load)
+      //   listener: (context, state) {
+      //     if (state.wasIncremented == true) {
+      //       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+      //         content: Text('Incremented'),
+      //       ));
+      //     } else {
+      //       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+      //         content: Text('Decremented'),
+      //       ));
+      //     }
+      //   },
+      //   child: Center(
+      //     child: Column(
+      //       mainAxisAlignment: MainAxisAlignment.center,
+      //       children: [
+      //         // BlocBuilder: A widget that helps re-building the UI based on bloc state changes
+      //         BlocBuilder<CounterCubit, CounterState>(
+      //             // buildWhen: (prevState, currState) {
+      //             //   // Return true/false to determine whether or not to rebuild the widget with state
+      //             //   return currState.counterValue % 2 == 0;
+      //             // },
+      //             builder: (context, state) {
+      //           // return widget here based on Bloc State
+      //           // the builder function can be called MULTIPLE TIMES (bcoz of flutter engine)
+      //           return Text(
+      //             "${state.counterValue}",
+      //             style: const TextStyle(fontSize: 30),
+      //           );
+      //         }),
+      //         const SizedBox(
+      //           height: 20,
+      //         ),
+      //         Row(
+      //           mainAxisAlignment: MainAxisAlignment.center,
+      //           children: [
+      //             FloatingActionButton(
+      //               onPressed: () {
+      //                 // // Without extensions
+      //                 // BlocProvider.of<CounterCubit>(context).decrement();
+      //                 // // with extensions
+      //                 context.read<CounterCubit>().decrement();
+      //               },
+      //               tooltip: 'Decrement',
+      //               child: const Icon(Icons.remove),
+      //             ),
+      //             const SizedBox(
+      //               width: 24,
+      //             ),
+      //             FloatingActionButton(
+      //               onPressed: () {
+      //                 // // Without extensions
+      //                 // BlocProvider.of<CounterCubit>(context).increment();
+      //                 // // with extensions
+      //                 context.read<CounterCubit>().increment();
+      //               },
+      //               tooltip: 'Increment',
+      //               child: const Icon(Icons.add),
+      //             )
+      //           ],
+      //         )
+      //       ],
+      //     ),
+      //   ),
+      // ),
     );
   }
 }
