@@ -27,5 +27,22 @@ REPOSITORY: Part of data layer through wich Bloc communicates. Prepares the data
 BUSINESS LOGIC LAYER:
     Intermediate bw Presentation layer and Data layer
     
+PRESENTATION LAYER:
 
+------
+
+FOLDER STRUCTURE:
+data
+    > dataproviders
+    > models
+    > repositories
+business_logic
+    > blocs
+    > cubits
+presentation
+    > pages
+    > widgets
+    > animaations
+    
+Libraries: Equatable
 
