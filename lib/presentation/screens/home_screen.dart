@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_v2/logic/cubit/counter_cubit.dart';
-import 'package:flutter_bloc_v2/presentation/screens/second_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -58,11 +57,14 @@ class HomeScreen extends StatelessWidget {
 
                   // Route Access: Providing bloc instance to new screen
                   // Anonymous Routing
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (_) => BlocProvider.value(
-                            value: context.read<CounterCubit>(), // make sure the 'context' provided here if of the current screen
-                            child: const SecondScreen(),
-                          )));
+                  // Navigator.of(context).push(MaterialPageRoute(
+                  //     builder: (_) => BlocProvider.value(
+                  //           value: context.read<CounterCubit>(), // make sure the 'context' provided here if of the current screen
+                  //           child: const SecondScreen(),
+                  //         )));
+                  
+                  // Named Routing
+                  Navigator.of(context).pushNamed('/second');
                 },
                 child: const Text('Second Page'))
           ],
