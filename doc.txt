@@ -1,0 +1,5 @@
+A Bloc/Cubit listen to another bloc/cubit
+    1. Stream Subscription
+    2. Bloc Listener
+
+Both methods are equually good.
