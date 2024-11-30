@@ -11,3 +11,11 @@ FLUTTER ROUTING OPTIONS:
     Generated Routing (recommended for large applications)
         - Navigating with a route name
         - Route names and their associated screens are setup inside a separate onGenerateRoute function
+
+BlocProvider() creates and provides a new instance of a bloc/cubit
+BlocProvider.value() takes an already created instance and then provides it further.
+
+We can provide bloc/cubit instances:
+    a. LOCALLY: provide instance to a SINGLE SCREEN
+    b. SPECIFICALLY: provide instance to 1 or more SCREEN
+    c. GLOBALLY: provide instance to ALL SCREENS
