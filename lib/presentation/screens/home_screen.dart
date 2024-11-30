@@ -57,9 +57,10 @@ class HomeScreen extends StatelessWidget {
                   //     MaterialPageRoute(builder: (_) => const SecondScreen()));
 
                   // Route Access: Providing bloc instance to new screen
+                  // Anonymous Routing
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (_) => BlocProvider.value(
-                            value: context.read<CounterCubit>(), // make sure the 'context' prov
+                            value: context.read<CounterCubit>(), // make sure the 'context' provided here if of the current screen
                             child: const SecondScreen(),
                           )));
                 },
