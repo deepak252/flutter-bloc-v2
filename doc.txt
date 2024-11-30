@@ -1,0 +1,13 @@
+Local Access: Providing an instance of a bloc/cubit to a SINGLE SCREEN (to its entire widget tree)
+Route Access: Providing an instance of a bloc/cubit to a MULTIPLE SCREENS (navigation with routes)
+
+FLUTTER ROUTING OPTIONS: 
+    Anonymous Routing 
+        - Navigating without route name
+        - Only the screens are used to navigate
+    Named Routing 
+        - Navigating with a provided route name
+        - Route Names and their associated screens are setup inside routes parameter of Materialapp widget
+    Generated Routing (recommended for large applications)
+        - Navigating with a route name
+        - Route names and their associated screens are setup inside a separate onGenerateRoute function
