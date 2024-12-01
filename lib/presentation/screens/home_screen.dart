@@ -37,9 +37,24 @@ class HomeScreen extends StatelessWidget {
             // Only builder will get rebuild on counter state change.
             Builder(builder: (ctx) {
               // Good
+              // context.watch: builder will rebuild even 'wasIncremented' value not changed but CounterState changes
               log('Render Counter2');
               return Text(
                 'Counter2: ${ctx.watch<CounterCubit>().state.wasIncremented}',
+                style: const TextStyle(fontSize: 24),
+              );
+            }),
+            const SizedBox(
+              height: 24,
+            ),
+            Builder(builder: (ctx) {
+              // Recommended
+              // context.select: builder will rebuild only whenever 'wasIncremented' changes.
+              log('Render Counter3');
+              final counterValue =
+                  ctx.select((CounterCubit cubit) => cubit.state.wasIncremented);
+              return Text(
+                'Counter3: $counterValue',
                 style: const TextStyle(fontSize: 24),
               );
             }),
