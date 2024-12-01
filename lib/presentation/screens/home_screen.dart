@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_v2/logic/cubit/counter_cubit.dart';
@@ -7,6 +8,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    log('Render HomeScreen');
     return Scaffold(
       appBar: AppBar(
         title: const Text("Home Screen"),
@@ -16,8 +18,28 @@ class HomeScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             BlocBuilder<CounterCubit, CounterState>(builder: (_, state) {
+              log('Render Counter1');
               return Text(
-                '${state.counterValue}',
+                'Counter1: ${state.counterValue}',
+                style: const TextStyle(fontSize: 24),
+              );
+            }),
+            const SizedBox(
+              height: 24,
+            ),
+            // Below code will cause render of Entire HomeScreen on counter state change,
+            // even if state changes from the second screen.
+            // Text( // Bad
+            //   'Counter2: ${context.watch<CounterCubit>().state.counterValue}',
+            //   style: const TextStyle(fontSize: 24),
+            // ),
+
+            // Only builder will get rebuild on counter state change.
+            Builder(builder: (ctx) {
+              // Good
+              log('Render Counter2');
+              return Text(
+                'Counter2: ${ctx.watch<CounterCubit>().state.wasIncremented}',
                 style: const TextStyle(fontSize: 24),
               );
             }),

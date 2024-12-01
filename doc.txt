@@ -1,0 +1,5 @@
+context.watch<BlocA>()
+    - From the widget that was built within the context BuildContext
+    - Start searching for the unique instance of BlocA(), provided above in the widget tree.
+    - After its found, watch or subscribe to its stream of emitted states
+    - And whenever a new state is emitted by BlocA, Rebuild the widget from which the lookup was started.
