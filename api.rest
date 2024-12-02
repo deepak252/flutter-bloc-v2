@@ -1,0 +1,31 @@
+# @baseUrl = https://jsonplaceholder.typicode.com
+# @baseUrl = https://dummyjson.com/c/3029-d29f-4014-9fb4
+@baseUrl = https://674df2a0635bad45618d4c75.mockapi.io/api/v1
+
+GET {{baseUrl}}/notes
+
+###
+
+GET {{baseUrl}}/notes/1
+
+###
+
+POST {{baseUrl}}/notes
+Content-Type: application/json
+
+{
+"title": "Test", "content": "Test content"
+}
+
+###
+
+PUT {{baseUrl}}/notes/5
+Content-Type: application/json
+
+{
+"title": "Test update", "content": "Test content"
+}
+
+###
+
+DELETE {{baseUrl}}/notes/5
