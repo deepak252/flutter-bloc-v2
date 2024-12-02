@@ -43,6 +43,34 @@ presentation
     > pages
     > widgets
     > animaations
+
+FOLDER STRUCTURE (Updated):
+lib/
+    core/
+        > constants
+            # api_path
+        > resources
+            # exceptions, failure, result
+        > services
+        > usecases
+            # usecase (abstract generic class)
+        > util
+            # db, logger
+    feature/
+        data
+            > datasources
+            > models
+            > repositories (repository impl)
+        domain
+            > entities
+            > repositories (abstract classes)
+            > usecases
+        presentation
+            > blocs
+            > cubits
+            > pages
+            > widgets
+            > animations
     
 Libraries: Equatable
 
