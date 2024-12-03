@@ -72,5 +72,40 @@ lib/
             > widgets
             > animations
     
-Libraries: Equatable
 
+
+1. Domain Layer (Core Business Logic)
+    The domain layer is the heart of the application where all the core business logic resides. It's independent of external libraries and frameworks like Flutter, APIs, or databases. This layer should focus solely on representing and implementing the essential features of your app, using abstractions (interfaces) for external dependencies.
+
+    Entities: Represent the core business models. For example, a User, Product, or Order class.
+    Repositories (Interfaces): Abstract interfaces that define how data is fetched or stored. These repositories are implemented in the data layer but are declared in the domain layer.
+    Use Cases/Interactors: Encapsulate specific business logic. Each use case should define a piece of functionality for the application (e.g., LoginUserUseCase, FetchProductsUseCase).
+
+    Order of Implementation:
+    Start with Entities: These are the foundational models that the rest of your app depends on.
+    Define Repository Interfaces: Set up the contracts for how the data layer should interact with the domain layer (e.g., methods like getUser(), getProducts()).
+    Implement Use Cases: Define business logic related to your entities.
+
+2. Data Layer (Data Management)
+    The data layer is responsible for fetching data from external sources (e.g., APIs, databases, local storage) and providing it to the domain layer. It implements the repository interfaces defined in the domain layer.
+
+    Models: Data models used to transfer data between the layers (e.g., API response models).
+    Data Sources: Classes or services that manage interaction with external data sources (e.g., RemoteDataSource, LocalDataSource).
+    Repository Implementations: The concrete classes that implement the repository interfaces and fetch data from external sources (e.g., an API client, database, or local storage).
+
+    Order of Implementation:
+    Create Models: Define the data models that will be used to communicate with the domain layer and external sources.
+    Create Data Sources: Implement the actual logic to fetch data (e.g., from an API or a database).
+    Implement Repository Interfaces: Create the concrete classes that implement the repository methods from the domain layer.
+
+3. Presentation Layer (UI and Interaction)
+    The presentation layer is responsible for handling user interface and interaction. This layer uses the use cases from the domain layer to perform the business logic and then update the UI accordingly.
+
+    View Models: A layer between the UI and the domain layer. It retrieves data via use cases and prepares it for display in the UI.
+    State Management: Classes that manage the state of the UI, typically using a state management solution (e.g., Provider, Riverpod, Bloc, setState).
+    UI Screens: Widgets that represent the different screens of the app (e.g., HomeScreen, LoginScreen).
+
+    Order of Implementation:
+    Implement State Management(Bloc): Set up the state management solution for handling UI updates and user interactions.
+    Connect with Use Cases: Use the use cases from the domain layer to retrieve and manipulate data for display in the UI.
+    Create UI Screens: Define the layout and structure of your screens.
