@@ -1,1 +1,1 @@
-export './get_notes.dart';
+export 'get_notes.dart';

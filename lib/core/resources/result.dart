@@ -7,10 +7,10 @@ abstract class Result<T> {
   const Result({this.data, this.failure});
 }
 
-abstract class ResultSuccess<T> extends Result<T> {
+class ResultSuccess<T> extends Result<T> {
   const ResultSuccess({super.data});
 }
 
-abstract class ResultFailure<T> extends Result<T> {
+class ResultFailure<T> extends Result<T> {
   const ResultFailure({super.failure, super.data});
 }
