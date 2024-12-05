@@ -6,10 +6,9 @@ import 'package:flutter_bloc_v2/features/notes/domain/entities/note.dart';
 import 'package:flutter_bloc_v2/features/notes/domain/repositories/notes_repository.dart';
 
 class NotesRepositoryImpl extends NotesRepository {
-  final NotesRemoteDataSourceImpl _notesRemoteDataSource;
+  final NotesRemoteDataSource _notesRemoteDataSource;
 
-  NotesRepositoryImpl(
-      {required NotesRemoteDataSourceImpl notesRemoteDataSource})
+  NotesRepositoryImpl({required NotesRemoteDataSource notesRemoteDataSource})
       : _notesRemoteDataSource = notesRemoteDataSource;
 
   @override

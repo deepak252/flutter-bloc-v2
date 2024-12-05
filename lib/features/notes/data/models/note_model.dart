@@ -3,8 +3,8 @@ import 'package:flutter_bloc_v2/features/notes/domain/entities/note.dart';
 List<NoteModel> notesFromJson(List<Map<String, dynamic>> notesJson) {
   return notesJson
       .map<NoteModel>((noteJson) => NoteModel.fromJson(noteJson))
-      .where((NoteModel note) =>
-          note.id.isNotEmpty) //Filter Invalid Note Format
+      .where(
+          (NoteModel note) => note.id.isNotEmpty) //Filter Invalid Note Format
       .toList();
 }
 
@@ -26,7 +26,8 @@ class NoteModel extends Note {
         id: json["id"],
         title: json["title"],
         content: json["content"],
-        createdAt: json["createdAt"],
+        createdAt:
+            DateTime.fromMillisecondsSinceEpoch((json["createdAt"] as int) * 1000),
       );
 
   NoteModel copyWith({
