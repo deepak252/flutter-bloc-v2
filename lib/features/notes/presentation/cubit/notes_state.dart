@@ -1,46 +1,19 @@
 part of 'notes_cubit.dart';
 
-abstract class NotesState extends Equatable {
-  @override
-  List<Object?> get props => [];
-}
+class NotesState extends Equatable {
+  final List<Note>? notes;
+  final bool? isLoading;
+  final String? error;
 
-class NotesInitialState extends NotesState {}
+  const NotesState({this.notes, this.isLoading, this.error});
 
-class GetNotesLoading extends NotesState {}
-
-class GetNotesSuccess extends NotesState {
-  final List<Note> notes;
-  GetNotesSuccess({required this.notes});
-
-  @override
-  List<Object?> get props => [notes];
-}
-
-class GetNotesError extends NotesState {
-  final String? message;
-  GetNotesError({this.message});
+  NotesState copyWith({List<Note>? notes, bool? isLoading, String? error}) {
+    return NotesState(
+        notes: notes ?? this.notes,
+        isLoading: isLoading ?? this.isLoading,
+        error: error ?? this.error);
+  }
 
   @override
-  List<Object?> get props => [message];
+  List<Object?> get props => [notes, isLoading];
 }
-
-// class NotesState extends Equatable {
-//   final List<Note>? notes;
-//   final bool? isLoading;
-
-//   const NotesState({this.notes, this.isLoading});
-
-//   @override
-//   List<Object?> get props => [notes, isLoading];
-
-//   NotesState copyWith({
-//     List<Note>? notes,
-//     bool? isLoading,
-//   }) {
-//     return NotesState(
-//       notes: notes ?? this.notes,
-//       isLoading: isLoading ?? this.isLoading,
-//     );
-//   }
-// }

@@ -10,15 +10,16 @@ class NotesCubit extends Cubit<NotesState> {
 
   NotesCubit({required GetNotes getNotes})
       : _getNotes = getNotes,
-        super(NotesInitialState());
+        super(const NotesState());
 
   Future getNotes() async {
-    emit(GetNotesLoading());
+    emit(state.copyWith(isLoading: true));
     final notesResult = await _getNotes();
     if (notesResult.failure != null) {
-      emit(GetNotesError(message: notesResult.failure?.message));
+      emit(state.copyWith(error: notesResult.failure?.message));
     } else {
-      emit(GetNotesSuccess(notes: notesResult.data ?? []));
+      emit(state.copyWith(notes: notesResult.data ?? []));
     }
+    emit(state.copyWith(isLoading: false));
   }
 }

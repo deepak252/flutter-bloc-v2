@@ -23,15 +23,10 @@ class _NotesScreenState extends State<NotesScreen> {
         title: const Text("Notes"),
       ),
       body: Builder(builder: (context) {
-        // contxt.select((CounterCubit cubit) => cubit.state.wasIncremented);
-        final notes = context.watch<NotesCubit>().state;
-        if (notes is GetNotesLoading) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-        if (notes is GetNotesSuccess) {
-          final notesList = notes.notes;
+        // final notes = context.watch<NotesCubit>().state;
+        final notes = context.select((NotesCubit cubit)=>cubit.state);
+        final notesList = notes.notes;
+        if (notesList != null) {
           return ListView.builder(
               itemCount: notesList.length,
               itemBuilder: (_, index) {
@@ -43,8 +38,13 @@ class _NotesScreenState extends State<NotesScreen> {
                 );
               });
         }
+        if (notes.isLoading == true) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
         return const Center(
-          child: Text('Something went wrong!'),
+          child: Text('No Records Found!'),
         );
       }),
     );
