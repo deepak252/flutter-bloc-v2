@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_bloc_v2/features/notes/presentation/cubit/notes_cubit.dart';
-import 'package:flutter_bloc_v2/features/notes/presentation/widgets/note_dialog.dart';
+import 'package:flutter_bloc_v2/features/notes/presentation/cubits/note_list_cubit.dart';
+import 'package:flutter_bloc_v2/features/notes/presentation/widgets/note_form_dialog.dart';
 
 class NotesScreen extends StatefulWidget {
   const NotesScreen({super.key});
@@ -13,7 +13,7 @@ class NotesScreen extends StatefulWidget {
 class _NotesScreenState extends State<NotesScreen> {
   @override
   void initState() {
-    context.read<NotesCubit>().getNotes();
+    context.read<NoteListCubit>().getNotes();
     super.initState();
   }
 
@@ -24,9 +24,9 @@ class _NotesScreenState extends State<NotesScreen> {
         title: const Text("Notes"),
       ),
       body: Builder(builder: (context) {
-        // final notes = context.watch<NotesCubit>().state;
-        final noteList = context.select((NotesCubit cubit) => cubit.state.noteList);
-        final notes = noteList.value;
+        // final notes = context.watch<NoteListCubit>().state;
+        final noteListState = context.select((NoteListCubit cubit) => cubit.state);
+        final notes = noteListState.notes;
         if (notes != null) {
           return ListView.builder(
               itemCount: notes.length,
@@ -39,7 +39,7 @@ class _NotesScreenState extends State<NotesScreen> {
                 );
               });
         }
-        if (noteList.isLoading == true) {
+        if (noteListState.isLoading == true) {
           return const Center(
             child: CircularProgressIndicator(),
           );
@@ -50,7 +50,7 @@ class _NotesScreenState extends State<NotesScreen> {
       }),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          showDialog(context: context, builder: (context) => NoteDialog());
+          showDialog(context: context, builder: (context) => NoteFormDialog());
         },
         child: const Icon(Icons.add),
       ),

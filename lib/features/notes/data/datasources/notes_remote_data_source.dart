@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 
 abstract class NotesRemoteDataSource {
   Future<List<NoteModel>> getNotes();
+  Future<NoteModel> createNote(NoteFormModel noteForm);
 }
 
 class NotesRemoteDataSourceImpl implements NotesRemoteDataSource {
@@ -19,6 +20,18 @@ class NotesRemoteDataSourceImpl implements NotesRemoteDataSource {
     if (response.statusCode == 200) {
       final notesJson = json.decode(response.body);
       return notesFromJson(List<Map<String, dynamic>>.from(notesJson));
+    } else {
+      throw ServerException(message: "Server Error");
+    }
+  }
+
+  @override
+  Future<NoteModel> createNote(NoteFormModel noteForm) async {
+    final response = await http.post(Uri.parse(ApiConstants.notesUrl),
+        body: noteForm.toJson());
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      final noteJson = json.decode(response.body);
+      return NoteModel.fromJson(noteJson);
     } else {
       throw ServerException(message: "Server Error");
     }

@@ -1,4 +1,4 @@
-import 'package:flutter_bloc_v2/features/notes/domain/entities/note.dart';
+import 'package:flutter_bloc_v2/features/notes/domain/entities/entities.dart';
 
 List<NoteModel> notesFromJson(List<Map<String, dynamic>> notesJson) {
   return notesJson
@@ -26,8 +26,8 @@ class NoteModel extends Note {
         id: json["id"],
         title: json["title"],
         content: json["content"],
-        createdAt:
-            DateTime.fromMillisecondsSinceEpoch((json["createdAt"] as int) * 1000),
+        createdAt: DateTime.fromMillisecondsSinceEpoch(
+            (json["createdAt"] as int) * 1000),
       );
 
   NoteModel copyWith({
